@@ -30,8 +30,8 @@ const GameBoard: React.FC = (): JSX.Element => {
             break;
         }
     }
-    setBoard(boardCopy)
     if(!areColumnsFilled) {
+        setBoard(boardCopy)
         setCurrPlayer(currPlayer == 1 ? 2 : 1)
     }
     if(winCheck(rowIndex, columnIndex)) {
@@ -58,17 +58,18 @@ const GameBoard: React.FC = (): JSX.Element => {
     };
     const checkDiagonalLeft = (rowIndex: number, columnIndex: number): boolean => {
         let consecutiveColumns: number = 0
-        let columnToStartFrom: number = rowIndex
-        let rowToStartFrom: number = columnIndex
+        let columnToStartFrom: number = columnIndex
+        let rowToStartFrom: number = rowIndex
         for(let i: number = 0; i < c4Rows;i++) {
             let column: Column = board.rows[rowIndex - i]?.columns[columnIndex + i]
             if(column) {
                 columnToStartFrom = columnIndex + i;
-                rowToStartFrom = rowIndex + i;
+                rowToStartFrom = rowIndex - i;
             } else {
              break
             }
         }
+        // error was at line 67 supposed to be minus instead of plus sign.
         for(let j: number = 0;j < c4Rows;j++) {
            let column: Column = board.rows[rowToStartFrom + j].columns[columnToStartFrom - j] 
            if(column) {
