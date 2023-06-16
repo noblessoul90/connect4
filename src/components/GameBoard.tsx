@@ -71,7 +71,7 @@ const GameBoard: React.FC = (): JSX.Element => {
         }
         // error was at line 67 supposed to be minus instead of plus sign.
         for(let j: number = 0;j < c4Rows;j++) {
-           let column: Column = board.rows[rowToStartFrom + j].columns[columnToStartFrom - j] 
+           let column: Column = board.rows[rowToStartFrom + j]?.columns[columnToStartFrom - j] 
            if(column) {
             if(column.player === board.rows[rowIndex].columns[columnIndex].player) {
                 consecutiveColumns++
@@ -93,7 +93,7 @@ const GameBoard: React.FC = (): JSX.Element => {
         if(indexDifference > 0) {
             columnToStartFrom = 0
             rowToStartFrom = indexDifference
-        } else if(indexDifference < 0) {
+        } else if(indexDifference !== 0) {
             columnToStartFrom = Math.abs(indexDifference)
         }
         for (let i: number = 0;i < c4Rows;i++) {
